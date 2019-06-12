@@ -44,6 +44,11 @@ describe SoapService do
             "</tem:#{operation.capitalize}>" \
           "</soapenv:Body>" \
       "</soapenv:Envelope>"
+
+    end
+    
+    let(:xml_request_test) do
+      "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">   <soapenv:Header/>   <soapenv:Body>      <tem:Multiply>         <tem:intA>25</tem:intA>         <tem:intB>50</tem:intB>      </tem:Multiply>   </soapenv:Body></soapenv:Envelope>"
     end
 
     it 'Makes a success request' do
@@ -51,7 +56,7 @@ describe SoapService do
       response_body =
         { "#{operation}_response".to_sym => { "#{operation}_result".to_sym =>
           operation_result.to_s, :@xmlns => 'http://tempuri.org/' } }
-      byebug
+
       # El llamado a call con xml siempre arroja un resultado de 0...
       expect((soap_client.call operation, xml: xml_request).body).to eq(response_body)
     end
