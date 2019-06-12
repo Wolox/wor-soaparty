@@ -1,7 +1,7 @@
-require "wor/soaparty/version"
+require 'wor/soaparty/version'
 
 module Wor
+  # Soaparty
   module Soaparty
-    # Your code goes here...
   end
 end
