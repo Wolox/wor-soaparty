@@ -21,7 +21,6 @@ describe SoapService do
   end
 
   context 'When making a SOAP request with a remote WSDL' do
-
     it 'Makes a successful request' do
       operation_result = operation_map.call operation
       response_body =
