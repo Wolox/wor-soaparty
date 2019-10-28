@@ -21,6 +21,7 @@ HasAndBelongsToMany:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*
+    - wor-soaparty.gemspec
 
 Style/FrozenStringLiteralComment:
   Enabled: false
