@@ -10,5 +10,6 @@
 *.gem
 Gemfile.lock
 *.DS_Store
-.rspec_status
 .byebug_history
+.rspec_status
+/bin/*
