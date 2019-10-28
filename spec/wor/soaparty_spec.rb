@@ -20,7 +20,7 @@ describe SoapService do
     end
   end
 
-  context 'When making a SOAP request with a remote WSDL' do
+  context 'when making a SOAP request with a remote WSDL' do
     it 'Makes a successful request' do
       operation_result = operation_map.call operation
       response_body =
@@ -30,7 +30,7 @@ describe SoapService do
     end
   end
 
-  context 'When making a SOAP request with an XML provided' do
+  context 'when making a SOAP request with an XML provided' do
     let(:definitions_blz) do
       {
         'xmlns:soapenv': 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -49,7 +49,7 @@ describe SoapService do
       soap_client.soap_document_constructor(definitions_blz, nodes_blz)
     end
 
-    it 'Makes a success request' do
+    it 'makes a success request' do
       operation_result = operation_map.call operation
       resp_body =
         { "#{operation}_response".to_sym => { "#{operation}_result".to_sym =>

@@ -1,6 +1,6 @@
 require 'savon'
 
-class SoapService # rubocop:disable Style/Documentation
+class SoapService
   attr_accessor :client
 
   MAIN_SOAP_NODES = {
