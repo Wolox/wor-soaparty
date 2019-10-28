@@ -33,7 +33,7 @@ Naming/VariableNumber:
   EnforcedStyle: snake_case
 
 RSpec/ExampleLength:
-  Exclude:
+  Max: 7
 
 RSpec/AnyInstance:
   Enabled: true

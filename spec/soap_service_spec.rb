@@ -8,18 +8,18 @@ describe SoapService do
   let(:operation)       { soap_client.client.operations.sample }
   let(:operation_map) do
     lambda do |operation|
-      case operation.to_s
-      when 'add'
+      case operation
+      when :add
         message[:intA] + message[:intB]
-      when 'subtract'
+      when :subtract
         message[:intA] - message[:intB]
-      when 'multiply'
+      when :multiply
         message[:intA] * message[:intB]
-      when 'divide'
+      when :divide
         ((message[:intA] + 0.0) / message[:intB]).round
       end
     end
-  end
+  endg
 
   context 'when making a SOAP request with a remote WSDL' do
     it 'makes a successful request' do
