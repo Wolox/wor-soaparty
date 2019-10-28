@@ -19,7 +19,7 @@ describe SoapService do
         ((message[:intA] + 0.0) / message[:intB]).round
       end
     end
-  endg
+  end
 
   context 'when making a SOAP request with a remote WSDL' do
     it 'makes a successful request' do
