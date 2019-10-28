@@ -3,6 +3,7 @@ require 'spec_helper'
 
 describe SoapService do
   subject(:soap_client) { described_class.new }
+
   let(:message)         { { intA: rand(101), intB: rand(101) } }
   let(:operation)       { soap_client.client.operations.sample }
   let(:operation_map) do
@@ -20,8 +21,8 @@ describe SoapService do
     end
   end
 
-  context 'When making a SOAP request with a remote WSDL' do
-    it 'Makes a successful request' do
+  context 'when making a SOAP request with a remote WSDL' do
+    it 'makes a successful request' do
       operation_result = operation_map.call operation
       response_body =
         { "#{operation}_response".to_sym => { "#{operation}_result".to_sym =>
