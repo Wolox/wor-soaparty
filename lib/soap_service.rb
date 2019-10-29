@@ -10,4 +10,8 @@ class SoapService
   def call(operation, message)
     @client.call(operation, message: message)
   end
+
+  def operations
+    @client.operations
+  end
 end
