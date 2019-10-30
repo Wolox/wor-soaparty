@@ -8,4 +8,5 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'rubocop'
+  gem 'rubocop-rspec', '~> 1.32'
 end
