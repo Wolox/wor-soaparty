@@ -1,7 +1,10 @@
-require "wor/soaparty/version"
+require 'wor/soaparty/version'
+require 'savon'
 
 module Wor
   module Soaparty
-    # Your code goes here...
+    def init_client(wsdl)
+      Savon.client wsdl: wsdl
+    end
   end
 end
