@@ -1,4 +1,4 @@
-require 'soap_service'
+require 'wor/soap_service'
 require 'spec_helper'
 
 describe SoapService do
@@ -17,17 +17,13 @@ describe SoapService do
   end
 
   context 'when making SOAP requests with remote WSDL documents' do
-    let(:calculator_soap_request) do
-      soap_clients[:calculator].call(operations[:calculator], messages[:calculator])
-    end
-    let(:bank_codes_soap_request) do
-      soap_clients[:bank_codes].call(operations[:bank_codes], messages[:bank_codes])
-    end
-    let(:currency_soap_request) do
-      soap_clients[:currency].call(operations[:currency], messages[:currency])
-    end
-    let(:liquidity_soap_request) do
-      soap_clients[:liquidity].call(operations[:liquidity], messages[:liquidity])
+    let(:soap_requests) do
+      [
+        soap_clients[:calculator].call(operations[:calculator], messages[:calculator]),
+        soap_clients[:bank_codes].call(operations[:bank_codes], messages[:bank_codes]),
+        soap_clients[:currency].call(operations[:currency], messages[:currency]),
+        soap_clients[:liquidity].call(operations[:liquidity], messages[:liquidity])
+      ]
     end
     let(:calculator_operation_map) do
       lambda do |operation|
@@ -45,18 +41,11 @@ describe SoapService do
     end
 
     it 'makes successful requests for the given WSDL documents' do
-      byebug
-      expect(calculator_soap_request.success?).to be true
-      expect(bank_codes_soap_request.success?).to be true
-      expect(currency_soap_request.success?).to be true
-      expect(liquidity_soap_request.success?).to be true
+      expect(soap_requests.all?(&:success?)).to be true
     end
 
     it 'doesn\'t return a SOAP Fault in any of the requests made to the WSDL documents' do
-      expect(calculator_soap_request.soap_fault?).to be false
-      expect(bank_codes_soap_request.soap_fault?).to be false
-      expect(currency_soap_request.soap_fault?).to be false
-      expect(liquidity_soap_request.soap_fault?).to be false
+      expect(soap_requests.all?(&:soap_fault?)).to be false
     end
 
     it 'returns the SOAP body expected when calculator service is requested' do
@@ -65,7 +54,7 @@ describe SoapService do
         { "#{operations[:calculator]}_response".to_sym =>
           { "#{operations[:calculator]}_result".to_sym =>
           operation_result.to_s, :@xmlns => 'http://tempuri.org/' } }
-      expect(calculator_soap_request.body).to eq(response_body)
+      expect(soap_requests.first.body).to eq(response_body)
     end
   end
 

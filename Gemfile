@@ -9,4 +9,5 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'nokogiri'
   gem 'rubocop'
+  gem 'rubocop-rspec', '~> 1.32'
 end
