@@ -1,4 +1,4 @@
-require 'soap_service'
+require 'wor/soap_service'
 require 'spec_helper'
 
 describe SoapService do
