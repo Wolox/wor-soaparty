@@ -14,7 +14,10 @@ class SoapService
     @client.call(operation, message: message)
   end
 
-<<<<<<< HEAD
+  def operations
+    @client.operations
+  end
+
   def soap_document_constructor(definitions, nodes)
     Nokogiri::XML::Builder.new do |xml|
       document_nodes_generator(xml, definitions, nodes)
@@ -40,9 +43,5 @@ class SoapService
       { "#{message_identifier}:#{key}": val }
     end
     message_nodes.each { |n| xml_object.send(n.keys.first, n.values.first) }
-=======
-  def operations
-    @client.operations
->>>>>>> external-wsdl-test
   end
 end

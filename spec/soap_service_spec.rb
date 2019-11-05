@@ -45,7 +45,7 @@ describe SoapService do
     end
 
     it 'doesn\'t return a SOAP Fault in any of the requests made to the WSDL documents' do
-      expect(soap_requests.all?(&:soap_fault?)).to be false
+      expect(soap_requests.none?(&:soap_fault?)).to be true
     end
 
     it 'returns the SOAP body expected when calculator service is requested' do
