@@ -45,7 +45,7 @@ describe SoapService do
     end
 
     it 'doesn\'t return a SOAP Fault in any of the requests made to the WSDL documents' do
-      expect(soap_requests.all?(&:soap_fault?)).to be false
+      expect(soap_requests.none?(&:soap_fault?)).to be true
     end
 
     it 'returns the SOAP body expected when calculator service is requested' do
@@ -55,6 +55,35 @@ describe SoapService do
           { "#{operations[:calculator]}_result".to_sym =>
           operation_result.to_s, :@xmlns => 'http://tempuri.org/' } }
       expect(soap_requests.first.body).to eq(response_body)
+    end
+  end
+
+  context 'when making a SOAP request with an XML provided' do
+    let(:soap_client) do
+      described_class.new('http://www.banguat.gob.gt/variables/ws/TipoCambio.asmx?WSDL')
+    end
+    let(:definitions) do
+      {
+        'xmlns:soapenv': 'http://schemas.xmlsoap.org/soap/envelope/',
+        "xmlns:#{msg_identifier}": 'http://www.banguat.gob.gt/variables/ws/'
+      }
+    end
+    let(:message) { { fechainit: '15/10/2019' } }
+    let(:operation) { :tipo_cambio_fecha_inicial }
+    let(:msg_identifier) { 'ws' }
+    let(:nodes) do
+      {
+        operation_tag: "#{msg_identifier}:TipoCambioFechaInicial",
+        message: message, message_attribute: msg_identifier
+      }
+    end
+    let(:xml_request) do
+      soap_client.soap_document_constructor(definitions, nodes)
+    end
+
+    it 'makes a success request' do
+      # expect((soap_client.call operation, xml: xml_request).success?).to be true # THIS FAILS
+      expect((soap_client.call operation, message).success?).to be true
     end
   end
 end

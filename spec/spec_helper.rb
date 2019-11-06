@@ -11,3 +11,4 @@ RSpec.configure do |config|
 end
 
 require 'byebug'
+require 'active_support/core_ext/hash'
